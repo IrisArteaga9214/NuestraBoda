@@ -47,7 +47,7 @@ export function RSVP() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const phoneNumber = "524428200679"
+    const phoneNumber = "524411014380"
     const attendanceText = form.attendance === "yes" 
       ? "Confirmo con gusto mi asistencia."
       : "Lamentablemente no podré asistir."
