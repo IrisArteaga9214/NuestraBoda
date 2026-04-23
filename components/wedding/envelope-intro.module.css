@@ -1,0 +1,119 @@
+.envelopeWrapper {
+  position: fixed;
+  inset: 0;
+  background: #f9f7f2;
+  overflow: hidden;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 4.5s ease-in-out 0.5s, visibility 4.5s ease 0.5s;
+}
+.openWrapper { opacity: 0; visibility: hidden; }
+.envelope { position: relative; width: 100vw; height: 100dvh; }
+.base { position: absolute; inset: 0; z-index: 1; transition: opacity 4s ease-in-out 0.5s; }
+.open .base { opacity: 0; }
+.base img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.flap { position: absolute; inset: 0; z-index: 4; pointer-events: none; perspective: 2500px; }
+.flap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform-origin: center -15%; 
+  transform: rotateX(0deg);
+  opacity: 1;
+  filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+  transition: 
+    transform 5.5s cubic-bezier(0.33, 1, 0.68, 1),
+    opacity 4.5s ease-in-out 0.5s,
+    filter 4s ease;
+}
+.open .flap img { transform: rotateX(115deg); opacity: 0; }
+.sealContainer {
+  position: absolute;
+  top: 53.5%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.8s ease;
+}
+.seal {
+  width: 130px;
+  height: 130px;
+  background: url('/images/wax-seal.png') center/contain no-repeat;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+  transition: transform 0.3s ease;
+}
+.sealContainer:hover .seal { transform: scale(1.05); }
+.hintText {
+  margin-top: 15px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #f0e0cf; 
+  opacity: 0.8;
+  animation: breathe 3s infinite ease-in-out;
+  pointer-events: none;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; transform: scale(0.95); }
+  50% { opacity: 0.7; transform: scale(1); }
+}
+.open .sealContainer { opacity: 0; pointer-events: none; }
+
+
+@media (min-width: 1024px) {
+  .envelope {
+    width: 900px; 
+    height: 450px;
+
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    z-index: 9999;
+    overflow: visible; 
+  }
+
+  .base, .flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .base img, .flap img {
+    width: 100%;
+    height: 200%; 
+    object-fit: cover;
+  }
+
+  .base img {
+    object-position: center 95%; 
+  }
+
+  .flap {
+    top: 222px; 
+    z-index: 4;
+  }
+
+  .flap img {
+    object-position: center 48%; 
+    transform-origin: center 32%; 
+  }
+
+  .sealContainer {
+    position: absolute;
+    top: 143%; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+}
